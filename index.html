@@ -1,0 +1,1043 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Glanz Fabrik — Premium Autoaufbereitung</title>
+<meta name="description" content="Premium Autoaufbereitung — Keramikversiegelung, Lackpolitur und Komplettaufbereitung auf höchstem Niveau.">
+<style>
+:root {
+  --bg: #080808;
+  --bg2: #121212;
+  --bg3: #1a1a1a;
+  --bg-card: #161616;
+  --border: #262626;
+  --text: #e8e8e8;
+  --text2: #999;
+  --text3: #666;
+  --accent: #3b9eff;
+  --accent-glow: rgba(59,158,255,0.25);
+  --accent-light: rgba(59,158,255,0.08);
+  --gold: #c9a84c;
+  --danger: #e55;
+  --success: #2ecc71;
+  --radius: 12px;
+  --radius-lg: 20px;
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; background: var(--bg); color: var(--text); font-family: var(--font); }
+body { min-height: 100vh; overflow-x: hidden; line-height: 1.6; }
+
+/* ── Typography ── */
+h1, h2, h3, .gradient-text { font-weight: 700; letter-spacing: -0.02em; }
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); line-height: 1.05; }
+h2 { font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+h3 { font-size: 1.25rem; line-height: 1.3; }
+.gradient-text {
+  background: linear-gradient(135deg, var(--accent), #6bc4ff, var(--accent));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+p { color: var(--text2); font-size: 1.05rem; }
+a { color: var(--accent); text-decoration: none; transition: color .2s; }
+a:hover { color: #6bc4ff; }
+
+/* ── Layout ── */
+.container { max-width: 1280px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem); }
+.section { padding: clamp(4rem, 10vw, 8rem) 0; }
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 14px 32px; border-radius: 50px; font-weight: 600;
+  font-size: 0.95rem; cursor: pointer; transition: all .3s ease;
+  border: none; text-decoration: none; font-family: var(--font);
+}
+.btn-primary {
+  background: var(--accent); color: #fff;
+  box-shadow: 0 4px 24px var(--accent-glow);
+}
+.btn-primary:hover { background: #4fa8ff; transform: translateY(-1px); box-shadow: 0 6px 32px var(--accent-glow); }
+.btn-outline {
+  background: transparent; color: var(--text);
+  border: 1.5px solid var(--border);
+}
+.btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ghost { background: transparent; color: var(--accent); padding: 10px 20px; }
+.btn-ghost:hover { background: var(--accent-light); }
+
+/* ── Navigation ── */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(8,8,8,0.85); backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  transition: transform .3s;
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 68px; max-width: 1280px; margin: 0 auto;
+  padding: 0 clamp(1rem, 5vw, 3rem);
+}
+.nav-logo { font-size: 1.3rem; font-weight: 800; letter-spacing: -0.03em; }
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 28px; align-items: center; }
+.nav-links a { color: var(--text2); font-size: 0.9rem; font-weight: 500; transition: color .2s; }
+.nav-links a:hover { color: var(--text); }
+.nav-cta { font-size: 0.85rem !important; }
+.menu-toggle { display: none; background: none; border: none; color: var(--text); cursor: pointer; padding: 8px; }
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-links.open { display: flex; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0;
+    background: var(--bg2); border-bottom: 1px solid var(--border); padding: 24px; gap: 16px; }
+  .menu-toggle { display: block; }
+}
+
+/* ── Hero ── */
+.hero {
+  min-height: 100vh; display: flex; align-items: center;
+  position: relative; overflow: hidden; padding-top: 68px;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background: radial-gradient(ellipse at 60% 40%, rgba(59,158,255,0.08) 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 70%, rgba(59,158,255,0.04) 0%, transparent 50%);
+}
+.hero-grid { position: absolute; inset: 0; background-image: 
+  linear-gradient(rgba(255,255,255,0.015) 1px, transparent 1px),
+  linear-gradient(90deg, rgba(255,255,255,0.015) 1px, transparent 1px);
+  background-size: 60px 60px; opacity: 0.5; z-index: 0;
+}
+.hero-content {
+  position: relative; z-index: 2; display: grid;
+  grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;
+  max-width: 1280px; margin: 0 auto; padding: 0 clamp(1rem, 5vw, 3rem);
+}
+.hero-text { max-width: 580px; }
+.hero-text h1 { margin-bottom: 20px; }
+.hero-text p { font-size: 1.15rem; color: var(--text2); margin-bottom: 36px; line-height: 1.7; }
+.hero-buttons { display: flex; gap: 14px; flex-wrap: wrap; }
+.hero-visual {
+  position: relative; display: flex; align-items: center; justify-content: center;
+  min-height: 450px;
+}
+@media (max-width: 900px) {
+  .hero-content { grid-template-columns: 1fr; gap: 32px; text-align: center; }
+  .hero-text { max-width: 100%; }
+  .hero-buttons { justify-content: center; }
+  .hero-visual { min-height: 300px; }
+}
+
+/* ── Car Canvas ── */
+.car-stage {
+  position: relative; width: 100%; max-width: 560px;
+}
+.car-stage canvas { width: 100%; height: auto; border-radius: var(--radius-lg); }
+.car-stage .reflection {
+  position: absolute; inset: 0; pointer-events: none; z-index: 2;
+  background: linear-gradient(135deg, transparent 40%, rgba(255,255,255,0.04) 50%, transparent 60%);
+  border-radius: var(--radius-lg); animation: gloss-sweep 3s ease infinite;
+}
+@keyframes gloss-sweep {
+  0%,100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* ── Cards ── */
+.card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 24px; }
+.card {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius-lg); padding: 36px 32px;
+  transition: all .3s ease; position: relative; overflow: hidden;
+}
+.card:hover { border-color: var(--accent); transform: translateY(-2px); box-shadow: 0 12px 48px rgba(0,0,0,0.3); }
+.card-accent {
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--accent); opacity: 0; transition: opacity .3s;
+}
+.card:hover .card-accent { opacity: 1; }
+.card-icon {
+  width: 52px; height: 52px; border-radius: 14px; display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px; font-size: 1.5rem; background: var(--accent-light);
+}
+.card h3 { margin-bottom: 10px; }
+.card p { font-size: 0.95rem; }
+.card .card-link { display: inline-flex; margin-top: 16px; font-weight: 600; font-size: 0.9rem; }
+
+/* ── Service Grid ── */
+.service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.service-item {
+  background: var(--bg-card); border: 1px solid var(--border);
+  border-radius: var(--radius); padding: 24px 20px; transition: all .2s;
+  cursor: pointer; position: relative;
+}
+.service-item:hover { border-color: var(--accent); background: var(--bg3); }
+.service-item h4 { font-size: 1rem; margin-bottom: 4px; }
+.service-item p { font-size: 0.85rem; }
+.service-item .arrow {
+  position: absolute; right: 20px; top: 50%; transform: translateY(-50%);
+  color: var(--text3); transition: all .2s;
+}
+.service-item:hover .arrow { color: var(--accent); transform: translateY(-50%) translateX(4px); }
+
+/* ── Before/After ── */
+.ba-slider { position: relative; border-radius: var(--radius-lg); overflow: hidden; background: var(--bg3); }
+.ba-slider img { display: block; width: 100%; }
+.ba-slider .ba-after {
+  position: absolute; top: 0; left: 0; width: 50%; height: 100%; overflow: hidden;
+  border-right: 3px solid var(--accent);
+}
+.ba-slider .ba-handle {
+  position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--accent); color: #fff; display: flex; align-items: center; justify-content: center;
+  cursor: ew-resize; z-index: 3; font-size: 0.7rem; font-weight: 700;
+  box-shadow: 0 0 0 6px rgba(59,158,255,0.25);
+}
+.ba-label {
+  position: absolute; bottom: 16px; padding: 4px 14px; border-radius: 20px;
+  font-size: 0.8rem; font-weight: 600; z-index: 2;
+}
+.ba-before-label { left: 16px; background: rgba(0,0,0,0.7); color: #fff; }
+.ba-after-label { right: 16px; background: var(--accent); color: #fff; }
+
+/* ── Configurator ── */
+.config { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg); overflow: hidden; }
+.config-header { padding: 28px 32px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+.config-steps { display: flex; gap: 8px; padding: 16px 32px; border-bottom: 1px solid var(--border); overflow-x: auto; }
+.config-step-dot {
+  display: flex; align-items: center; gap: 8px; font-size: 0.8rem; font-weight: 600;
+  color: var(--text3); white-space: nowrap; padding: 6px 0;
+}
+.config-step-dot.active { color: var(--accent); }
+.config-step-dot.done { color: var(--success); }
+.config-step-dot .dot {
+  width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  background: var(--bg3); border: 2px solid var(--border); font-size: 0.75rem; font-weight: 700; transition: all .3s;
+}
+.config-step-dot.active .dot { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.config-step-dot.done .dot { border-color: var(--success); background: rgba(46,204,113,0.1); color: var(--success); }
+.config-body { padding: 32px; min-height: 300px; }
+.config-options { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; }
+.config-option {
+  background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius);
+  padding: 20px 16px; cursor: pointer; transition: all .2s; text-align: center;
+  font-weight: 600; font-size: 0.9rem;
+}
+.config-option:hover { border-color: var(--accent); background: var(--accent-light); }
+.config-option.selected { border-color: var(--accent); background: var(--accent-light); color: var(--accent); }
+.config-checkboxes { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+.config-checkbox {
+  display: flex; align-items: center; gap: 12px; padding: 14px 18px;
+  background: var(--bg-card); border: 2px solid var(--border); border-radius: var(--radius);
+  cursor: pointer; transition: all .2s; font-size: 0.9rem;
+}
+.config-checkbox:hover { border-color: var(--accent); }
+.config-checkbox.checked { border-color: var(--accent); background: var(--accent-light); }
+.config-checkbox .check {
+  width: 22px; height: 22px; border-radius: 6px;
+  border: 2px solid var(--border); display: flex; align-items: center; justify-content: center;
+  font-size: 0.7rem; transition: all .2s; flex-shrink: 0;
+}
+.config-checkbox.checked .check { background: var(--accent); border-color: var(--accent); color: #fff; }
+.config-nav { display: flex; gap: 12px; justify-content: space-between; margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+.config-form { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.config-form .full { grid-column: 1/-1; }
+.config-form input, .config-form textarea, .config-form select {
+  width: 100%; padding: 14px 18px; border-radius: var(--radius); border: 2px solid var(--border);
+  background: var(--bg); color: var(--text); font-size: 0.95rem; font-family: var(--font);
+  transition: border-color .2s;
+}
+.config-form input:focus, .config-form textarea:focus, .config-form select:focus {
+  outline: none; border-color: var(--accent);
+}
+.config-form textarea { resize: vertical; min-height: 100px; }
+.config-summary { background: var(--bg-card); border-radius: var(--radius); padding: 24px; }
+.config-summary h4 { margin-bottom: 16px; }
+.config-summary .row { display: flex; justify-content: space-between; padding: 8px 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+@media (max-width: 600px) {
+  .config-form { grid-template-columns: 1fr; }
+  .config-header { flex-direction: column; gap: 12px; }
+}
+
+/* ── Reviews ── */
+.review-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+.review-card {
+  background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 28px;
+}
+.review-card .stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 8px; letter-spacing: 2px; }
+.review-card p { font-size: 0.95rem; margin-bottom: 12px; font-style: italic; }
+.review-card .author { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+.review-card .date { font-size: 0.8rem; color: var(--text3); }
+
+/* ── CTA Section ── */
+.cta-section {
+  background: var(--bg2); border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 64px clamp(2rem, 5vw, 4rem); text-align: center; position: relative; overflow: hidden;
+}
+.cta-section::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at center, var(--accent-glow) 0%, transparent 70%);
+  opacity: 0.3; pointer-events: none;
+}
+.cta-section > * { position: relative; z-index: 1; }
+.cta-section h2 { margin-bottom: 16px; }
+.cta-section p { max-width: 560px; margin: 0 auto 32px; }
+
+/* ── Footer ── */
+.footer { background: var(--bg2); border-top: 1px solid var(--border); padding: 48px 0 32px; }
+.footer-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 40px; }
+.footer h4 { font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px; color: var(--text); }
+.footer a, .footer p { display: block; font-size: 0.9rem; color: var(--text2); margin-bottom: 8px; }
+.footer-bottom { margin-top: 40px; padding-top: 24px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-size: 0.85rem; color: var(--text3); }
+
+/* ── Animations ── */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate { animation: fade-up 0.7s ease both; }
+.animate-d1 { animation-delay: 0.1s; }
+.animate-d2 { animation-delay: 0.2s; }
+.animate-d3 { animation-delay: 0.3s; }
+.animate-d4 { animation-delay: 0.4s; }
+
+/* ── Scroll reveal ── */
+.reveal { opacity: 0; transform: translateY(30px); transition: all 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+/* ── Badge / Tags ── */
+.badge {
+  display: inline-block; padding: 4px 12px; border-radius: 20px;
+  font-size: 0.75rem; font-weight: 600; background: var(--accent-light);
+  color: var(--accent); margin-bottom: 12px;
+}
+
+/* ── Section headers ── */
+.section-header { text-align: center; margin-bottom: 56px; }
+.section-header h2 { margin-bottom: 12px; }
+.section-header p { max-width: 560px; margin: 0 auto; }
+
+/* ── Page sections (for tab navigation) ── */
+.page-section { display: none; }
+.page-section.active { display: block; }
+
+/* ── Mobile ── */
+@media (max-width: 600px) {
+  .card-grid { grid-template-columns: 1fr; }
+  .review-grid { grid-template-columns: 1fr; }
+  .service-grid { grid-template-columns: 1fr; }
+  .hero-text h1 { font-size: 2.2rem; }
+}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<!-- ── Navigation ── -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" onclick="scrollToSection('hero')">GLANZ<span>FABRIK</span></a>
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Menu">☰</button>
+    <div class="nav-links" id="navLinks">
+      <a href="#" onclick="scrollToSection('leistungen')">Leistungen</a>
+      <a href="#" onclick="scrollToSection('konfigurator')">Konfigurator</a>
+      <a href="#" onclick="scrollToSection('referenzen')">Referenzen</a>
+      <a href="#" onclick="scrollToSection('flotte')">Flotten</a>
+      <a href="#" onclick="scrollToSection('ueber-uns')">Über uns</a>
+      <a href="#" onclick="scrollToSection('kontakt')">Kontakt</a>
+      <a href="#" onclick="scrollToSection('konfigurator')" class="btn btn-primary nav-cta">Termin anfragen</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ── Hero ── -->
+<section class="hero" id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-text animate">
+      <div class="badge">Premium Autoaufbereitung</div>
+      <h1>Premium <span class="gradient-text">Autoaufbereitung</span> für Fahrzeuge mit Anspruch</h1>
+      <p>Keramikversiegelung, Lackpolitur und Komplettaufbereitung auf höchstem Niveau — für mehr Glanz, Schutz und Werterhalt.</p>
+      <div class="hero-buttons">
+        <a href="#konfigurator" class="btn btn-primary" onclick="scrollToSection('konfigurator')">Termin anfragen →</a>
+        <a href="#konfigurator" class="btn btn-outline" onclick="scrollToSection('konfigurator')">Fahrzeug konfigurieren</a>
+      </div>
+    </div>
+    <div class="hero-visual animate animate-d2">
+      <div class="car-stage">
+        <canvas id="carCanvas" width="560" height="400"></canvas>
+        <div class="reflection"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Intro ── -->
+<section class="section" id="intro">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Glanz Fabrik</div>
+      <h2>Mehr als sauber.<br><span class="gradient-text">Sichtbar aufbereitet. Spürbar hochwertig.</span></h2>
+      <p>Glanz Fabrik steht für professionelle Fahrzeugaufbereitung mit Fokus auf Qualität, Präzision und Werterhalt. Vom Daily Driver bis zum Premiumfahrzeug — jedes Fahrzeug wird mit dem Anspruch behandelt, ein Ergebnis zu liefern, das man sofort sieht.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ── 3 Hauptleistungen ── -->
+<section class="section" id="leistungen" style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Leistungen</div>
+      <h2>Drei Säulen der <span class="gradient-text">Perfektion</span></h2>
+    </div>
+    <div class="card-grid">
+      <div class="card reveal">
+        <div class="card-accent"></div>
+        <div class="card-icon">🛡️</div>
+        <h3>Keramikversiegelung</h3>
+        <p>Langfristiger Schutz für Lack und Oberflächen. Mehr Glanz, leichtere Reinigung und sichtbarer Werterhalt.</p>
+        <a href="#konfigurator" class="card-link" onclick="scrollToSection('konfigurator')">Jetzt anfragen →</a>
+      </div>
+      <div class="card reveal animate-d1">
+        <div class="card-accent"></div>
+        <div class="card-icon">✨</div>
+        <h3>Lackpolitur</h3>
+        <p>Entfernung von Waschkratzern, Hologrammen und matten Stellen für mehr Tiefenglanz und eine sichtbar aufgewertete Lackoberfläche.</p>
+        <a href="#konfigurator" class="card-link" onclick="scrollToSection('konfigurator')">Jetzt anfragen →</a>
+      </div>
+      <div class="card reveal animate-d2">
+        <div class="card-accent"></div>
+        <div class="card-icon">🔄</div>
+        <h3>Komplettaufbereitung</h3>
+        <p>Gründliche Innen- und Außenaufbereitung — ideal für Werterhalt, Verkauf, Leasingrückgabe oder den perfekten Gesamtzustand.</p>
+        <a href="#konfigurator" class="card-link" onclick="scrollToSection('konfigurator')">Jetzt anfragen →</a>
+      </div>
+    </div>
+
+    <!-- Zusatzleistungen -->
+    <div style="margin-top: 64px;" class="reveal">
+      <div class="section-header" style="margin-bottom: 32px;">
+        <h3 style="font-size: 1.6rem;">Zusatzleistungen</h3>
+      </div>
+      <div class="service-grid">
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Lederaufbereitung</h4><p>Reinigung & Pflege</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Smart Repair</h4><p>Kleine Schäden, große Wirkung</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Felgenaufbereitung</h4><p>Strahlende Räder</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Felgenversiegelung</h4><p>Dauerhafter Schutz</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Innenraumaufbereitung</h4><p>Tiefenreinigung & Frische</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Außenaufbereitung</h4><p>Wäsche & Finish</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Geruchsentfernung</h4><p>Ozonbehandlung</p><span class="arrow">→</span>
+        </div>
+        <div class="service-item" onclick="scrollToSection('konfigurator')">
+          <h4>Leasingrückgabe</h4><p>Perfekte Rückgabe</p><span class="arrow">→</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Konfigurator ── -->
+<section class="section" id="konfigurator">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Konfigurator</div>
+      <h2>Fahrzeug <span class="gradient-text">konfigurieren</span></h2>
+      <p>Wählen Sie Fahrzeugklasse, gewünschte Leistungen und senden Sie uns Ihre Anfrage.</p>
+    </div>
+    <div class="config reveal">
+      <div class="config-header">
+        <h3 id="configStepTitle">Schritt 1: Fahrzeugklasse</h3>
+        <span style="color: var(--text3); font-size: 0.9rem;">Schritt <span id="currentStepNum">1</span>/5</span>
+      </div>
+      <div class="config-steps" id="stepDots">
+        <div class="config-step-dot active" data-step="1"><span class="dot">1</span> Fahrzeugklasse</div>
+        <div class="config-step-dot" data-step="2"><span class="dot">2</span> Hauptleistung</div>
+        <div class="config-step-dot" data-step="3"><span class="dot">3</span> Zusatzleistungen</div>
+        <div class="config-step-dot" data-step="4"><span class="dot">4</span> Zustand</div>
+        <div class="config-step-dot" data-step="5"><span class="dot">5</span> Kontaktdaten</div>
+      </div>
+      <div class="config-body" id="configBody"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Referenzen ── -->
+<section class="section" id="referenzen" style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Referenzen</div>
+      <h2>Vorher <span class="gradient-text">Nachher</span></h2>
+      <p>Ergebnisse, die für sich sprechen.</p>
+    </div>
+    <div class="reveal" style="max-width: 800px; margin: 0 auto;">
+      <div class="ba-slider" id="baSlider1">
+        <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #1a1a1a 40%, #222); display: flex; align-items: center; justify-content: center; color: var(--text2); font-size: 1.1rem;">
+          <div style="text-align:center"><div style="font-size:3rem;opacity:0.3">🚗</div>Vorher</div>
+        </div>
+        <div class="ba-after" id="baAfter">
+          <div style="width: 100%; height: 400px; background: linear-gradient(135deg, #0a1628, #111); display: flex; align-items: center; justify-content: center; color: var(--accent); font-size: 1.1rem;">
+            <div style="text-align:center"><div style="font-size:3rem;opacity:0.5">✨</div>Nachher</div>
+          </div>
+        </div>
+        <div class="ba-handle" id="baHandle">⟷</div>
+        <div class="ba-label ba-before-label">VORHER</div>
+        <div class="ba-label ba-after-label">NACHHER</div>
+      </div>
+    </div>
+
+    <!-- Google Reviews -->
+    <div style="margin-top: 80px;" class="reveal">
+      <div class="section-header" style="margin-bottom: 36px;">
+        <div class="badge">Bewertungen</div>
+        <h3 style="font-size: 1.6rem;">Was unsere Kunden sagen</h3>
+        <p style="margin-top: 8px;">⭐ 4,9 von 5 — basierend auf <span style="color: var(--accent);">120+ Google-Bewertungen</span></p>
+      </div>
+      <div class="review-grid">
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>„Mein BMW sah aus wie neu! Die Keramikversiegelung ist der Wahnsinn — Wasser perlt einfach ab. Absolute Empfehlung!"</p>
+          <div class="author">Michael K.</div>
+          <div class="date">vor 2 Wochen</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>„Unglaubliche Verwandlung nach der Lackpolitur. Kratzer komplett verschwunden, der Glanz ist beeindruckend. Sehr professionell!"</p>
+          <div class="author">Sarah L.</div>
+          <div class="date">vor 1 Monat</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>„Komplettaufbereitung für Leasingrückgabe gemacht — Fahrzeug wurde ohne Beanstandung zurückgenommen. Top Service!"</p>
+          <div class="author">Thomas R.</div>
+          <div class="date">vor 3 Wochen</div>
+        </div>
+        <div class="review-card">
+          <div class="stars">★★★★★</div>
+          <p>„Seit Jahren Kunde. Immer perfekte Ergebnisse, faire Preise und ein Team, das seinen Job liebt. Glanz Fabrik ist die Nr. 1."</p>
+          <div class="author">Petra M.</div>
+          <div class="date">vor 2 Monaten</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Flottenreinigung ── -->
+<section class="section" id="flotte">
+  <div class="container">
+    <div class="reveal" style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <div>
+        <div class="badge">Firmenkunden</div>
+        <h2 style="margin-bottom: 16px;">Flottenreinigung für <span class="gradient-text">Unternehmen</span></h2>
+        <p style="font-size: 1.1rem; margin-bottom: 28px;">Regelmäßige Reinigung und Aufbereitung für Firmenfahrzeuge, Fuhrparks und Händlerfahrzeuge. Flexible Lösungen für einzelne Fahrzeuge bis hin zu kompletten Flotten.</p>
+        <a href="#konfigurator" class="btn btn-primary" onclick="scrollToSection('konfigurator')">Firmenanfrage stellen →</a>
+      </div>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); padding: 40px; text-align: center;">
+        <div style="font-size: 4rem; margin-bottom: 16px; opacity: 0.6;">🚛</div>
+        <h3 style="margin-bottom: 8px;">Individuelle Flottenlösungen</h3>
+        <p>Von kleinen Fuhrparks bis Großflotten — wir passen uns Ihren Anforderungen an.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Über uns ── -->
+<section class="section" id="ueber-uns" style="background: var(--bg2);">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="badge">Über uns</div>
+      <h2>Die <span class="gradient-text">Glanz Fabrik</span></h2>
+      <p>Moderne Halle, erfahrenes Team, höchste Qualitätsstandards.</p>
+    </div>
+    <div class="reveal" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 24px; text-align: center;">
+      <div style="padding: 32px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">🏭</div>
+        <h3 style="margin-bottom: 8px;">Moderne Halle</h3>
+        <p>300m² Arbeitsfläche mit modernster Technik und LED-Beleuchtung für präzise Ergebnisse.</p>
+      </div>
+      <div style="padding: 32px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">👨‍🔧</div>
+        <h3 style="margin-bottom: 8px;">Erfahrenes Team</h3>
+        <p>Zertifizierte Fahrzeugaufbereiter mit jahrelanger Erfahrung und Leidenschaft für Perfektion.</p>
+      </div>
+      <div style="padding: 32px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">✅</div>
+        <h3 style="margin-bottom: 8px;">Qualitätsgarantie</h3>
+        <p>Wir stehen für jedes Ergebnis ein. Zufriedenheit ist unser oberstes Versprechen.</p>
+      </div>
+      <div style="padding: 32px 24px; background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg);">
+        <div style="font-size: 2.5rem; margin-bottom: 12px;">📈</div>
+        <h3 style="margin-bottom: 8px;">Kontinuierliches Wachstum</h3>
+        <p>Stetige Investition in Technik, Schulungen und Prozesse für immer bessere Ergebnisse.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── CTA ── -->
+<section class="section" id="kontakt">
+  <div class="container">
+    <div class="cta-section reveal">
+      <div class="badge">Bereit für mehr Glanz?</div>
+      <h2>Jetzt Fahrzeug anfragen oder <span class="gradient-text">direkt konfigurieren</span></h2>
+      <p>Wähle Fahrzeugklasse und gewünschte Leistungen oder sende uns direkt eine Anfrage mit deinen Wünschen.</p>
+      <div style="display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;">
+        <a href="#konfigurator" class="btn btn-primary" onclick="scrollToSection('konfigurator')">Jetzt anfragen →</a>
+        <a href="#konfigurator" class="btn btn-outline" onclick="scrollToSection('konfigurator')">Konfigurator starten</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<footer class="footer" id="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div>
+        <div class="nav-logo" style="margin-bottom: 12px;">GLANZ<span>FABRIK</span></div>
+        <p>Premium Autoaufbereitung<br>für höchste Ansprüche.</p>
+      </div>
+      <div>
+        <h4>Leistungen</h4>
+        <a href="#" onclick="scrollToSection('leistungen')">Keramikversiegelung</a>
+        <a href="#" onclick="scrollToSection('leistungen')">Lackpolitur</a>
+        <a href="#" onclick="scrollToSection('leistungen')">Komplettaufbereitung</a>
+        <a href="#" onclick="scrollToSection('flotte')">Flottenreinigung</a>
+      </div>
+      <div>
+        <h4>Unternehmen</h4>
+        <a href="#" onclick="scrollToSection('ueber-uns')">Über uns</a>
+        <a href="#" onclick="scrollToSection('referenzen')">Referenzen</a>
+        <a href="#" onclick="scrollToSection('kontakt')">Kontakt</a>
+      </div>
+      <div>
+        <h4>Kontakt</h4>
+        <p>📞 <a href="tel:+430000000000">+43 000 000 0000</a></p>
+        <p>✉️ <a href="mailto:info@glanzfabrik.at">info@glanzfabrik.at</a></p>
+        <p style="margin-top: 12px; display: flex; gap: 12px;">
+          <a href="#" style="font-size: 1.3rem;">📷</a>
+          <a href="#" style="font-size: 1.3rem;">📘</a>
+          <a href="#" style="font-size: 1.3rem;">📌</a>
+        </p>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Glanz Fabrik. Alle Rechte vorbehalten.</span>
+      <span>
+        <a href="#" style="color: var(--text3);">Impressum</a> ·
+        <a href="#" style="color: var(--text3);">Datenschutz</a> ·
+        <a href="#" style="color: var(--text3);">AGB</a>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── Navigation ── */
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+function scrollToSection(id) {
+  document.getElementById('navLinks').classList.remove('open');
+  const el = document.getElementById(id);
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+/* ── Scroll Reveal ── */
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+/* ── Sticky Nav ── */
+let lastScroll = 0;
+window.addEventListener('scroll', () => {
+  const nav = document.getElementById('nav');
+  const y = window.scrollY;
+  if (y > lastScroll && y > 200) nav.style.transform = 'translateY(-100%)';
+  else nav.style.transform = 'translateY(0)';
+  lastScroll = y;
+});
+
+/* ── Car Canvas Animation ── */
+(function() {
+  const c = document.getElementById('carCanvas');
+  if (!c) return;
+  const ctx = c.getContext('2d');
+  const W = c.width, H = c.height;
+  let frame = 0;
+
+  function drawCarBody(dirtLevel) {
+    // Road
+    ctx.fillStyle = '#181818';
+    ctx.fillRect(0, H * 0.75, W, H * 0.25);
+    ctx.strokeStyle = '#2a2a2a';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([20,15]);
+    ctx.beginPath(); ctx.moveTo(0, H * 0.75); ctx.lineTo(W, H * 0.75); ctx.stroke();
+    ctx.setLineDash([]);
+
+    // Car shadow
+    ctx.fillStyle = 'rgba(0,0,0,0.4)';
+    ctx.beginPath(); ctx.ellipse(W/2, H*0.72, 180, 12, 0, 0, Math.PI*2); ctx.fill();
+
+    // Wheels
+    const wheelX = [W*0.28, W*0.72];
+    wheelX.forEach(wx => {
+      ctx.fillStyle = '#111';
+      ctx.beginPath(); ctx.arc(wx, H*0.62, 42, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = '#1a1a1a';
+      ctx.beginPath(); ctx.arc(wx, H*0.62, 28, 0, Math.PI*2); ctx.fill();
+      const spokeAngle = frame * 0.02;
+      for (let i=0; i<5; i++) {
+        const a = spokeAngle + i * Math.PI*2/5;
+        ctx.strokeStyle = '#333';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(wx, H*0.62);
+        ctx.lineTo(wx + Math.cos(a)*26, H*0.62 + Math.sin(a)*26);
+        ctx.stroke();
+      }
+      ctx.fillStyle = '#222';
+      ctx.beginPath(); ctx.arc(wx, H*0.62, 8, 0, Math.PI*2); ctx.fill();
+      // Rim highlight
+      ctx.strokeStyle = 'rgba(120,140,160,0.3)';
+      ctx.lineWidth = 3;
+      ctx.beginPath(); ctx.arc(wx, H*0.62, 42, -Math.PI*0.8, -Math.PI*0.2); ctx.stroke();
+    });
+
+    // Body
+    const bodyY = H*0.28;
+    const bodyH = H*0.38;
+    ctx.fillStyle = dirtLevel < 0.5
+      ? `rgba(20,22,28,${1-dirtLevel*0.3})`
+      : `rgba(40,38,32,${0.6+dirtLevel*0.3})`;
+    ctx.beginPath();
+    ctx.moveTo(W*0.12, bodyY+bodyH);
+    ctx.lineTo(W*0.12, bodyY+bodyH*0.35);
+    ctx.quadraticCurveTo(W*0.2, bodyY-bodyH*0.05, W*0.3, bodyY);
+    ctx.quadraticCurveTo(W*0.5, bodyY-bodyH*0.1, W*0.7, bodyY);
+    ctx.quadraticCurveTo(W*0.8, bodyY-bodyH*0.05, W*0.88, bodyY+bodyH*0.35);
+    ctx.lineTo(W*0.88, bodyY+bodyH);
+    ctx.closePath(); ctx.fill();
+
+    // Windows
+    ctx.fillStyle = `rgba(30,40,55,${0.7+dirtLevel*0.15})`;
+    ctx.beginPath();
+    ctx.moveTo(W*0.2, bodyY+bodyH*0.35);
+    ctx.quadraticCurveTo(W*0.25, bodyY+bodyH*0.1, W*0.32, bodyY+bodyH*0.05);
+    ctx.lineTo(W*0.5, bodyY+bodyH*0.05);
+    ctx.lineTo(W*0.5, bodyY+bodyH*0.32);
+    ctx.quadraticCurveTo(W*0.4, bodyY+bodyH*0.2, W*0.2, bodyY+bodyH*0.35);
+    ctx.fill();
+    // Rear window
+    ctx.beginPath();
+    ctx.moveTo(W*0.55, bodyY+bodyH*0.05);
+    ctx.lineTo(W*0.68, bodyY+bodyH*0.05);
+    ctx.quadraticCurveTo(W*0.78, bodyY+bodyH*0.1, W*0.8, bodyY+bodyH*0.35);
+    ctx.lineTo(W*0.55, bodyY+bodyH*0.32);
+    ctx.quadraticCurveTo(W*0.6, bodyY+bodyH*0.2, W*0.55, bodyY+bodyH*0.05);
+    ctx.fill();
+
+    // Headlights
+    ctx.fillStyle = '#3b9eff';
+    ctx.shadowColor = '#3b9eff'; ctx.shadowBlur = 12;
+    ctx.beginPath();
+    ctx.moveTo(W*0.88, bodyY+bodyH*0.38);
+    ctx.quadraticCurveTo(W*0.93, bodyY+bodyH*0.42, W*0.92, bodyY+bodyH*0.55);
+    ctx.lineTo(W*0.88, bodyY+bodyH*0.58);
+    ctx.fill();
+    // Taillights
+    ctx.fillStyle = '#e04040';
+    ctx.shadowColor = '#e04040'; ctx.shadowBlur = 8;
+    ctx.beginPath();
+    ctx.moveTo(W*0.12, bodyY+bodyH*0.38);
+    ctx.quadraticCurveTo(W*0.07, bodyY+bodyH*0.42, W*0.08, bodyY+bodyH*0.55);
+    ctx.lineTo(W*0.12, bodyY+bodyH*0.58);
+    ctx.fill();
+    ctx.shadowBlur = 0;
+
+    // Dirt overlay
+    if (dirtLevel > 0.05) {
+      ctx.globalAlpha = dirtLevel * 0.8;
+      for (let i=0; i<40; i++) {
+        const dx = W*0.15 + Math.sin(i*7.3+frame*0.005) * W*0.3;
+        const dy = bodyY + bodyH*0.1 + Math.cos(i*5.1) * bodyH*0.7;
+        ctx.fillStyle = '#3a3628';
+        ctx.beginPath(); ctx.arc(dx, dy, 3+Math.random()*6, 0, Math.PI*2); ctx.fill();
+      }
+      ctx.globalAlpha = 1;
+    }
+
+    // Gloss when clean
+    if (dirtLevel < 0.3) {
+      ctx.fillStyle = 'rgba(255,255,255,0.06)';
+      ctx.beginPath();
+      ctx.moveTo(W*0.15, bodyY+bodyH*0.15);
+      ctx.quadraticCurveTo(W*0.35, bodyY+bodyH*0.02, W*0.55, bodyY+bodyH*0.08);
+      ctx.quadraticCurveTo(W*0.35, bodyY+bodyH*0.18, W*0.15, bodyY+bodyH*0.3);
+      ctx.fill();
+      // Water droplet effect
+      ctx.fillStyle = 'rgba(150,200,255,0.15)';
+      const dropX = W*0.4 + Math.sin(frame*0.03)*50;
+      ctx.beginPath(); ctx.arc(dropX, bodyY+bodyH*0.2, 6, 0, Math.PI*2); ctx.fill();
+      ctx.fillStyle = 'rgba(150,200,255,0.1)';
+      ctx.beginPath(); ctx.arc(dropX+15, bodyY+bodyH*0.25, 4, 0, Math.PI*2); ctx.fill();
+    }
+  }
+
+  function animate() {
+    frame++;
+    ctx.clearRect(0, 0, W, H);
+    // Cycle dirt: dirty → clean → dirty
+    const cycle = (Math.sin(frame * 0.015) + 1) / 2; // 0..1
+    const dirtLevel = cycle;
+    drawCarBody(dirtLevel);
+
+    // Label
+    if (dirtLevel > 0.7) {
+      ctx.fillStyle = 'rgba(255,255,255,0.4)';
+      ctx.font = '12px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Vor der Aufbereitung', W/2, H*0.92);
+    } else if (dirtLevel < 0.15) {
+      ctx.fillStyle = 'rgba(59,158,255,0.6)';
+      ctx.font = '12px Inter, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText('Nach der Aufbereitung', W/2, H*0.92);
+    }
+    requestAnimationFrame(animate);
+  }
+  animate();
+})();
+
+/* ── Before/After Slider ── */
+(function() {
+  const slider = document.getElementById('baSlider1');
+  const after = document.getElementById('baAfter');
+  const handle = document.getElementById('baHandle');
+  if (!slider) return;
+  let dragging = false;
+
+  function update(x) {
+    const rect = slider.getBoundingClientRect();
+    let pct = (x - rect.left) / rect.width;
+    pct = Math.max(0.05, Math.min(0.95, pct));
+    after.style.width = (pct * 100) + '%';
+    handle.style.left = (pct * 100) + '%';
+  }
+
+  handle.addEventListener('mousedown', e => { dragging = true; e.preventDefault(); });
+  handle.addEventListener('touchstart', e => { dragging = true; e.preventDefault(); });
+  window.addEventListener('mousemove', e => { if (dragging) update(e.clientX); });
+  window.addEventListener('touchmove', e => { if (dragging) update(e.touches[0].clientX); });
+  window.addEventListener('mouseup', () => { dragging = false; });
+  window.addEventListener('touchend', () => { dragging = false; });
+  // Init
+  update(slider.getBoundingClientRect().left + slider.getBoundingClientRect().width * 0.5);
+})();
+
+/* ── Configurator ── */
+const CONFIG_STEPS = [
+  { title: 'Schritt 1: Fahrzeugklasse', type: 'options', key: 'vehicleClass', options: [
+    { label: 'Kleinwagen', icon: '🚗' },
+    { label: 'Kompaktwagen', icon: '🚙' },
+    { label: 'Limousine', icon: '🚘' },
+    { label: 'Kombi', icon: '🚐' },
+    { label: 'SUV', icon: '🚜' },
+    { label: 'Van / Transporter', icon: '🚛' },
+  ]},
+  { title: 'Schritt 2: Hauptleistung', type: 'options', key: 'mainService', options: [
+    { label: 'Keramikversiegelung', desc: 'Langfristiger Lackschutz' },
+    { label: 'Lackpolitur', desc: 'Tiefenglanz & Kratzerentfernung' },
+    { label: 'Komplettaufbereitung', desc: 'Innen & Außen' },
+    { label: 'Innenaufbereitung', desc: 'Tiefenreinigung Innenraum' },
+    { label: 'Außenaufbereitung', desc: 'Wäsche & Finish Außen' },
+    { label: 'Flottenreinigung / Firmenanfrage', desc: 'Für Unternehmen' },
+  ]},
+  { title: 'Schritt 3: Zusatzleistungen', type: 'checkboxes', key: 'extras', options: [
+    { label: 'Lederaufbereitung' },
+    { label: 'Smart Repair' },
+    { label: 'Felgenaufbereitung' },
+    { label: 'Felgenversiegelung' },
+    { label: 'Geruchsentfernung' },
+    { label: 'Leasingrückgabe / Verkaufsaufbereitung' },
+    { label: 'Sonstiges' },
+  ]},
+  { title: 'Schritt 4: Zustand / Details', type: 'checkboxes', key: 'condition', options: [
+    { label: 'Leichte Verschmutzung' },
+    { label: 'Starke Verschmutzung' },
+    { label: 'Tierhaare' },
+    { label: 'Raucherfahrzeug' },
+    { label: 'Kratzer / Matte Stellen' },
+    { label: 'Felgen stark verschmutzt' },
+    { label: 'Leder beschädigt / verfärbt' },
+  ]},
+  { title: 'Schritt 5: Kontaktdaten', type: 'form', key: 'contact' },
+];
+
+let configStep = 0;
+let configData = { vehicleClass: null, mainService: null, extras: [], condition: [], contact: {} };
+
+function renderConfig() {
+  if (configStep >= CONFIG_STEPS.length) {
+    renderSummary();
+    return;
+  }
+  const step = CONFIG_STEPS[configStep];
+  document.getElementById('configStepTitle').textContent = step.title;
+  document.getElementById('currentStepNum').textContent = configStep + 1;
+
+  // Update step dots
+  document.querySelectorAll('.config-step-dot').forEach((dot, i) => {
+    dot.classList.remove('active', 'done');
+    if (i < configStep) dot.classList.add('done');
+    if (i === configStep) dot.classList.add('active');
+  });
+
+  let html = '';
+  if (step.type === 'options') {
+    html += '<div class="config-options">';
+    step.options.forEach(opt => {
+      const sel = configData[step.key] === opt.label ? ' selected' : '';
+      html += `<div class="config-option${sel}" onclick="selectOption('${step.key}','${opt.label}')">
+        ${opt.desc ? '<div style="font-size:1.5rem;margin-bottom:6px">'+(opt.label.includes('Keramik')?'🛡️':opt.label.includes('Lack')?'✨':opt.label.includes('Komplett')?'🔄':opt.label.includes('Innen')?'🪥':opt.label.includes('Außen')?'🧽':'🚛')+'</div>' : ''}
+        <div>${opt.label}</div>
+        ${opt.desc ? '<div style="font-size:0.8rem;color:var(--text3);margin-top:4px">'+opt.desc+'</div>' : ''}
+      </div>`;
+    });
+    html += '</div>';
+  } else if (step.type === 'checkboxes') {
+    html += '<div class="config-checkboxes">';
+    step.options.forEach(opt => {
+      const checked = configData[step.key].includes(opt.label) ? ' checked' : '';
+      html += `<div class="config-checkbox${checked}" onclick="toggleCheckbox('${step.key}','${opt.label}')">
+        <span class="check">${checked ? '✓' : ''}</span>${opt.label}
+      </div>`;
+    });
+    html += '</div>';
+  } else if (step.type === 'form') {
+    html += `<div class="config-form">
+      <input type="text" placeholder="Name *" id="cfName" value="${configData.contact.name||''}">
+      <input type="tel" placeholder="Telefonnummer *" id="cfPhone" value="${configData.contact.phone||''}">
+      <input type="email" placeholder="E-Mail *" id="cfEmail" value="${configData.contact.email||''}">
+      <input type="text" placeholder="Fahrzeugmodell" id="cfModel" value="${configData.contact.model||''}">
+      <input type="date" placeholder="Wunschdatum" id="cfDate" value="${configData.contact.date||''}">
+      <input type="text" placeholder="Kennzeichen (optional)" id="cfPlate" value="${configData.contact.plate||''}">
+      <textarea class="full" placeholder="Nachricht / Besonderheiten" id="cfMsg">${configData.contact.message||''}</textarea>
+      <div class="full" style="display:flex;align-items:flex-start;gap:12px;font-size:0.85rem;color:var(--text2);margin-top:8px">
+        <input type="checkbox" id="cfDsgvo" style="margin-top:3px;accent-color:var(--accent)">
+        <label for="cfDsgvo">Ich stimme zu, dass meine Daten zur Bearbeitung der Anfrage verwendet werden. <a href="#">Datenschutzerklärung</a></label>
+      </div>
+    </div>`;
+  }
+
+  html += `<div class="config-nav">
+    <div>${configStep > 0 ? '<button class="btn btn-outline" onclick="prevStep()" style="padding:10px 24px">← Zurück</button>' : '<span></span>'}</div>
+    <button class="btn btn-primary" onclick="nextStep()" style="padding:10px 32px">${configStep === CONFIG_STEPS.length-1 ? 'Anfrage senden →' : 'Weiter →'}</button>
+  </div>`;
+  document.getElementById('configBody').innerHTML = html;
+}
+
+function nextStep() {
+  const step = CONFIG_STEPS[configStep];
+  if (step.type === 'form') {
+    // Save form data
+    configData.contact = {
+      name: document.getElementById('cfName')?.value || '',
+      phone: document.getElementById('cfPhone')?.value || '',
+      email: document.getElementById('cfEmail')?.value || '',
+      model: document.getElementById('cfModel')?.value || '',
+      date: document.getElementById('cfDate')?.value || '',
+      plate: document.getElementById('cfPlate')?.value || '',
+      message: document.getElementById('cfMsg')?.value || '',
+      dsgvo: document.getElementById('cfDsgvo')?.checked || false,
+    };
+    // Validate
+    if (!configData.contact.name || !configData.contact.phone || !configData.contact.email) {
+      alert('Bitte füllen Sie alle Pflichtfelder (*) aus.');
+      return;
+    }
+    if (!configData.contact.dsgvo) {
+      alert('Bitte akzeptieren Sie die Datenschutzerklärung.');
+      return;
+    }
+    configStep++;
+    renderConfig();
+    return;
+  }
+  configStep++;
+  if (configStep < CONFIG_STEPS.length) renderConfig();
+  else renderSummary();
+}
+
+function prevStep() {
+  if (configStep > 0) {
+    configStep--;
+    renderConfig();
+  }
+}
+
+function selectOption(key, value) {
+  configData[key] = value;
+}
+
+function toggleCheckbox(key, value) {
+  const arr = configData[key];
+  const idx = arr.indexOf(value);
+  if (idx > -1) arr.splice(idx, 1);
+  else arr.push(value);
+  renderConfig();
+}
+
+function renderSummary() {
+  document.getElementById('configStepTitle').textContent = '✓ Zusammenfassung';
+  document.getElementById('currentStepNum').textContent = '✓';
+  document.querySelectorAll('.config-step-dot').forEach(dot => dot.classList.add('done'));
+
+  let html = '<div class="config-summary"><h4>Ihre Anfrage</h4>';
+  html += `<div class="row"><span>Fahrzeugklasse</span><strong>${configData.vehicleClass||'-'}</strong></div>`;
+  html += `<div class="row"><span>Hauptleistung</span><strong>${configData.mainService||'-'}</strong></div>`;
+  html += `<div class="row"><span>Zusatzleistungen</span><strong>${configData.extras.length ? configData.extras.join(', ') : 'Keine'}</strong></div>`;
+  html += `<div class="row"><span>Zustand</span><strong>${configData.condition.length ? configData.condition.join(', ') : 'Keine Angabe'}</strong></div>`;
+  const c = configData.contact;
+  html += `<div class="row"><span>Name</span><strong>${c.name}</strong></div>`;
+  html += `<div class="row"><span>Telefon</span><strong>${c.phone}</strong></div>`;
+  html += `<div class="row"><span>E-Mail</span><strong>${c.email}</strong></div>`;
+  if (c.model) html += `<div class="row"><span>Fahrzeug</span><strong>${c.model}</strong></div>`;
+  if (c.date) html += `<div class="row"><span>Wunschdatum</span><strong>${c.date}</strong></div>`;
+  html += '</div>';
+
+  html += `<div style="text-align:center;margin-top:28px">
+    <div class="badge" style="background:rgba(46,204,113,0.1);color:var(--success);font-size:1rem;padding:12px 24px">
+      ✓ Anfrage wird gesendet...
+    </div>
+    <p style="margin-top:12px;color:var(--text2)">Sie erhalten in Kürze eine Bestätigung per E-Mail.</p>
+    <button class="btn btn-outline" onclick="configStep=0;configData={vehicleClass:null,mainService:null,extras:[],condition:[],contact:{}};renderConfig()" style="margin-top:20px">Neue Anfrage</button>
+  </div>`;
+
+  document.getElementById('configBody').innerHTML = html;
+}
+
+// Init
+renderConfig();
+</script>
+</body>
+</html>
